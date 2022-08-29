@@ -14,7 +14,10 @@ const displayPhone = phones => {
     // display phone found
     const noPhone = document.getElementById('no-found-message')
     if (phones.length === 0) {
-        noPhone.classList.remove('d-none')
+        noPhone.classList.remove('d-none');
+    }
+    else {
+        noPhone.classList.add('d-none');
     }
     // display all phone
     phones.forEach(phone => {
@@ -30,14 +33,31 @@ const displayPhone = phones => {
         </div>
             `;
         phoneContainer.appendChild(phoneDiv);
-    })
+    });
+    // stop spinner or loader
+    toggleSpinner(false);
 }
 
 
+
+
+// handle search button click
 document.getElementById('btn-search').addEventListener('click', function () {
+    // star loader
+    toggleSpinner(true);
     const searchField = document.getElementById('search-field');
     const searchText = searchField.value;
     loadPhones(searchText)
 })
+
+const toggleSpinner = isLoading => {
+    const loaderSection = document.getElementById('loader');
+    if (isLoading) {
+        loaderSection.classList.remove('d-none')
+    }
+    else {
+        loaderSection.classList.add('d-none')
+    }
+}
 
 // loadPhones();
